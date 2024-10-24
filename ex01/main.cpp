@@ -6,7 +6,7 @@
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:34:41 by lottavi           #+#    #+#             */
-/*   Updated: 2024/10/24 16:15:35 by lottavi          ###   ########.fr       */
+/*   Updated: 2024/10/24 16:31:29 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include <limits>
 #include <sstream>
 #include <csignal>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include <cstdlib>
 
 void searchCommand(const Phonebook& phonebook) {
 	phonebook.searchContact();
@@ -35,11 +38,9 @@ void searchCommand(const Phonebook& phonebook) {
 			std::cout << "Invalid input. Please enter a valid index." << std::endl;
 			continue;
 		}
-
 		if (input == "PREV") {
-			return; // Torna al menu principale
+			return;
 		}
-
 		std::istringstream iss(input);
 		if (!(iss >> index) || index < 1 || index > phonebook.getContactCount()) {
 			std::cout << "Invalid input. Please enter a valid index." << std::endl;
@@ -48,28 +49,26 @@ void searchCommand(const Phonebook& phonebook) {
 
 		break;
 	}
-	phonebook.viewContact(index - 1); // L'indice dell'utente è 1-based
+	phonebook.viewContact(index - 1);
 }
 
 int main() {
-
 	Phonebook phonebook;
-	std::string command;
+	char* input;
 
 	while (true) {
-		std::cout << "Enter command (ADD, SEARCH, EXIT): ";
-		if (!(std::cin >> command)) {
-			if (std::cin.eof()) {
-				std::cin.clear();
-				std::cout << "\nEOF received. Exiting gracefully..." << std::endl;
-				break;
-			}
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "Invalid input. Please try again." << std::endl;
-			continue;
+		input = readline("Enter command (ADD, SEARCH, EXIT): ");
+		if (input == NULL) {
+			std::cout << "\nEOF received. Exiting gracefully..." << std::endl;
+			break;
 		}
 
+		std::string command(input);
+		free(input);
+
+		if (command == "ADD" || command == "SEARCH" || command == "PREV" || command == "EXIT") {
+			add_history(command.c_str());
+		}
 		if (command == "ADD") {
 			std::string firstName, lastName, nickname, phoneNum, darkSecret;
 			std::cout << "Enter first name: ";

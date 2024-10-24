@@ -6,13 +6,14 @@
 #    By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/22 16:44:50 by lottavi           #+#    #+#              #
-#    Updated: 2024/10/24 15:35:50 by lottavi          ###   ########.fr        #
+#    Updated: 2024/10/24 16:26:10 by lottavi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = PhoneBook
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
+LDFLAGS = -lreadline
 SRC = main.cpp phonebook.cpp contact.cpp
 BUILD_DIR = build
 OBJ_DIR = $(BUILD_DIR)/obj
@@ -24,7 +25,7 @@ all: $(BIN_DIR)/$(NAME)
 
 $(BIN_DIR)/$(NAME): $(OBJ)
 	@mkdir -p $(BIN_DIR)
-	$(CC) $(CFLAGS) $(OBJ) -o $(BIN_DIR)/$(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -o $(BIN_DIR)/$(NAME) $(LDFLAGS)
 	@echo "$(NAME) made"
 
 $(OBJ_DIR)/%.o: %.cpp $(DEPS)
