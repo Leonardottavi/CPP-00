@@ -5,28 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 16:38:02 by lottavi           #+#    #+#             */
-/*   Updated: 2024/10/22 17:01:57 by lottavi          ###   ########.fr       */
+/*   Created: 2024/10/24 15:02:29 by lottavi           #+#    #+#             */
+/*   Updated: 2024/10/24 15:35:35 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_HPP
 #define CONTACT_HPP
 
-#include <vector>
-#include <iomanip>
 #include <string>
-#include <iostream>
 
 class Contact
 {
-public:
-	int index;
+private:
 	std::string firstName;
 	std::string lastName;
 	std::string nickname;
-	std::string phoneNum;
-	std::string darkSecret;
+	std::string phoneNumber;
+	std::string darkestSecret;
+
+public:
+	Contact();
+	Contact(const std::string& firstName, const std::string& lastName, const std::string& nickname,
+			const std::string& phoneNumber, const std::string& darkestSecret);
+
+	std::string getFirstName() const;
+	std::string getLastName() const;
+	std::string getNickname() const;
+	std::string getPhoneNumber() const;
+	std::string getDarkestSecret() const;
 };
 
 #endif

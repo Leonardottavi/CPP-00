@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contact_functions.hpp                              :+:      :+:    :+:   */
+/*   phonebook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lottavi <lottavi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 17:00:39 by lottavi           #+#    #+#             */
-/*   Updated: 2024/10/22 17:00:51 by lottavi          ###   ########.fr       */
+/*   Created: 2024/10/24 15:03:22 by lottavi           #+#    #+#             */
+/*   Updated: 2024/10/24 15:35:39 by lottavi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACT_FUNCTIONS_HPP
-#define CONTACT_FUNCTIONS_HPP
+#ifndef PHONEBOOK_HPP
+#define PHONEBOOK_HPP
 
-#include <vector>
+#include <string>
 #include "contact.hpp"
 
-std::string truncate(const std::string& str, size_t width);
-void printContacts(const std::vector<Contact>& contacts);
-void displayContact(const Contact& contact);
-void searchContact(const std::vector<Contact>& contacts);
-void addContact(std::vector<Contact>& contacts);
+class Phonebook
+{
+private:
+	Contact contacts[8];
+	int contactCount;
+	int nextIndex;
 
-#endif
+public:
+	Phonebook();
+
+	void addContact(const Contact& contact);
+	void searchContact() const;
+	void viewContact(int index) const;
+	int getContactCount() const;
+};
+
+#endif // PHONEBOOK_HPP
